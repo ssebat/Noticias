@@ -1,4 +1,5 @@
 var port = process.env.PORT || 8000;
+var http = require('http');
 var express = require('express');
 var app = express();
 var sql = require('mssql');
@@ -1912,6 +1913,7 @@ router.post('/ComponenteFallas/:pComponenteFalla_Id', function (req, res) {
 
 app.use(router);
 
-var server = app.listen(port, function () {
-    console.log('Server is running in http://localhost:3000');
+var server = http.createServer(app);
+
+server.listen(port, function () {
 });
