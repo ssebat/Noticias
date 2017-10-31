@@ -16,6 +16,8 @@ var config = {
     }
 };
 
+var server = http.createServer(app);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
@@ -1913,7 +1915,6 @@ router.post('/ComponenteFallas/:pComponenteFalla_Id', function (req, res) {
 
 app.use(router);
 
-var server = http.createServer(app);
 
 server.listen(port, function () {
 });
