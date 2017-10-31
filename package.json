@@ -1,0 +1,11 @@
+{
+  "name": "ConFa_ApiWeb",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "latest",
+    "http": "latest",
+    "method-override": "latest",
+    "body-parser": "latest",
+    "mssql": "latest"
+  }
+}
