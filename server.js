@@ -70,6 +70,12 @@ router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&p
     res.send(lsql);
 });
 
+router.post('/WriteNews2/pTitle=:pTitle', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var pTitle = req.params.pTitle;
+    lsql = "EXEC CreaNews2 '" + pTitle + "'";
+    executeQuery(res, lsql);
+});
 
 app.use(router);
 
