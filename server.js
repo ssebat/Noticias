@@ -68,10 +68,14 @@ router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&p
     executeQuery(res, lsql);
 });
 
-router.post("/WriteNews2/:pTitle", function (req, res) {
+//router.post("/WriteNews2/:pTitle", function (req, res) {
+  router.post('/WriteNews2', function (req, res) {
     //res.setHeader('Access-Control-Allow-Origin', '*');
-    var lsqlx = "EXECUTE CreaNews2 " + req.params.Title;
-    executeQuery(res, lsqlx);
+    console.log(req.params.pTitle);
+    var lsqlx = "EXECUTE CreaNews2 " + req.params.pTitle;
+    //var lsqlx = "EXECUTE CreaNews2 " + "1";
+    console.log("40");
+    //executeQuery(res, lsqlx);
 });
 
 app.use(router);
