@@ -6,8 +6,6 @@ var sql = require('mssql');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-var swagger = require("swagger-node-express");
-
 var config = {
     user: 'usr_admin',
     password: 'Pass2018',
@@ -67,18 +65,17 @@ router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&p
     var pPublisher = (req.params.pPublisher=='null' ? req.params.pPublisher : "'" + req.params.pPublisher + "'");
     lsql = "EXEC CreaNews " + pTime + ", " + pTitle + ", " + pDescription + ", "+  pImage + ", " + pWritten_by + ", " + pPublisher + "";
     console.log (lsql);
-    executeQuery(res, lsql);  
+    executeQuery(res, lsql);
 });
 
-router.post('/WriteNews2/Title=:pTitle', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    var pTitle = req.params.Title;
-    lsql = "EXEC CreaNews2 " + pTitle;
-    console.log (lsql);
-    executeQuery(res, lsql);
+router.post("/WriteNews2/:pTitle", function (req, res) {
+    //res.setHeader('Access-Control-Allow-Origin', '*');
+    var lsqlx = "EXECUTE CreaNews2 " + req.params.Title;
+    executeQuery(res, lsqlx);
 });
 
 app.use(router);
 
 server.listen(port, function () {
+  console.log(port);
 });
