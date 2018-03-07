@@ -6,6 +6,7 @@
     "http": "latest",
     "method-override": "latest",
     "body-parser": "latest",
-    "mssql": "latest"
+    "mssql": "latest",
+    "swagger-node-express": "latest"
   }
 }

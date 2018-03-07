@@ -6,6 +6,8 @@ var sql = require('mssql');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var swagger = require("swagger-node-express");
+
 var config = {
     user: 'usr_admin',
     password: 'Pass2018',
@@ -54,7 +56,28 @@ router.get('/News', function (req, res) {
     executeQuery(res, lsql);
 });
 
+
+router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&pImage=:pImage&pWritten_by=:pWritten_by&pPublisher=:pPublisher', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var pTime = (req.params.pTime=='null' ? req.params.pTime : "'" + req.params.pTime + "'");
+    var pTitle = (req.params.pTitle=='null' ? req.params.pTitle : "'" + req.params.pTitle + "'");
+    var pDescription = (req.params.pDescription=='null' ? req.params.pDescription : "'" + req.params.pDescription + "'");
+    var pImage =  (req.params.pImage=='null' ? req.params.pImage : "'" + req.params.pImage + "'");
+    var pWritten_by = (req.params.pWritten_by=='null' ? req.params.pWritten_by : "'" + req.params.pWritten_by + "'");
+    var pPublisher = (req.params.pPublisher=='null' ? req.params.pPublisher : "'" + req.params.pPublisher + "'");
+    lsql = 'EXEC CreaNews ' + pTime + ', ' + pTitle + ', ' + pDescription + ', '+  pImage + ', ' + pWritten_by + ', ' + pPublisher;
+    executeQuery(res, lsql);
+});
+
 app.use(router);
+
+var subpath = express();
+
+app.use("/swagger",subpath);
+
+swagger.setAppHandler(subpath);
+
+swagger.configure("https://newsapimti.azurewebsites.net/swagger","0.1");
 
 server.listen(port, function () {
 });
