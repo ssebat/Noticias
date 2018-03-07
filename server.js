@@ -66,14 +66,15 @@ router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&p
     var pWritten_by = (req.params.pWritten_by=='null' ? req.params.pWritten_by : "'" + req.params.pWritten_by + "'");
     var pPublisher = (req.params.pPublisher=='null' ? req.params.pPublisher : "'" + req.params.pPublisher + "'");
     lsql = "EXEC CreaNews " + pTime + ", " + pTitle + ", " + pDescription + ", "+  pImage + ", " + pWritten_by + ", " + pPublisher + "";
-    //executeQuery(res, lsql);
-    res.send(lsql);
+    console.log (lsql);
+    executeQuery(res, lsql);  
 });
 
 router.post('/WriteNews2/Title=:pTitle', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var pTitle = req.params.Title;
     lsql = "EXEC CreaNews2 " + pTitle;
+    console.log (lsql);
     executeQuery(res, lsql);
 });
 
