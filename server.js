@@ -69,7 +69,7 @@ router.get('/News', function (req, res) {
 
 router.get('/News/:pidNoticia', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    lsql = 'EXEC ListNewsid'+ req.params.pidNoticia ;
+    lsql = 'EXEC ListNewsid '+ req.params.pidNoticia ;
     executeQuery(res, lsql);
 });
 
