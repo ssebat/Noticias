@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var sql = require('mssql');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+//var methodOverride = require('method-override');
 
 var config = {
     user: 'usr_admin',
@@ -18,7 +18,7 @@ var config = {
 
 var server = http.createServer(app);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 var router = express.Router();
@@ -48,13 +48,6 @@ var  executeQuery = function(res2, query){
     });
 };
 
-router.get('/News', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    lsql = 'EXEC ListNews';
-    executeQuery(res, lsql);
-});
-
-
 router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&pImage=:pImage&pWritten_by=:pWritten_by&pPublisher=:pPublisher', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var pTime = (req.params.pTime=='null' ? req.params.pTime : "'" + req.params.pTime + "'");
@@ -68,14 +61,16 @@ router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&p
     executeQuery(res, lsql);
 });
 
-//router.post("/WriteNews2/:pTitle", function (req, res) {
-  router.post('/WriteNews2', function (req, res) {
-    //res.setHeader('Access-Control-Allow-Origin', '*');
-    console.log(req.params.pTitle);
-    var lsqlx = "EXECUTE CreaNews2 " + req.params.pTitle;
-    //var lsqlx = "EXECUTE CreaNews2 " + "1";
-    console.log("40");
-    //executeQuery(res, lsqlx);
+router.get('/News', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    lsql = 'EXEC ListNews';
+    executeQuery(res, lsql);
+});
+
+router.get('/News/:pidNoticia', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    lsql = 'EXEC ListNewsid'+ req.params.pidNoticia ;
+    executeQuery(res, lsql);
 });
 
 app.use(router);
