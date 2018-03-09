@@ -75,6 +75,4 @@ router.get('/News/:pidNoticia', function (req, res) {
 
 app.use(router);
 
-server.listen(port, function () {
-  console.log(port);
-});
+server.listen(port, function () {});
