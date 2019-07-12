@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 var config = {
-    user: 'usr_admin',
-    password: 'Pass2018',
+    user: '',
+    password: '',
     server: 'newsmti.database.windows.net',
     database: 'Noticias',
     options: {
