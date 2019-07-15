@@ -48,7 +48,7 @@ var  executeQuery = function(res2, query){
     });
 };
 
-router.post('/WriteData/pData=:pTime, function (req, res) {
+router.post('/WriteData/pData=:pData, function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var pData = (req.params.pData=='null' ? req.params.pData : "'" + req.params.pData + "'");
     lsql = "EXEC CargaData " + pData + "";
