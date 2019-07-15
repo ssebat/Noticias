@@ -9,8 +9,8 @@ var methodOverride = require('method-override');
 var config = {
     user: '',
     password: '',
-    server: 'newsmti.database.windows.net',
-    database: 'Noticias',
+    server: 'servebdbeac.database.windows.net',
+    database: 'bd_beac',
     options: {
         encrypt: true
     }
@@ -48,28 +48,17 @@ var  executeQuery = function(res2, query){
     });
 };
 
-router.post('/WriteNews/pTime=:pTime&pTitle=:pTitle&pDescription=:pDescription&pImage=:pImage&pWritten_by=:pWritten_by&pPublisher=:pPublisher', function (req, res) {
+router.post('/WriteData/pData=:pTime, function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var pTime = (req.params.pTime=='null' ? req.params.pTime : "'" + req.params.pTime + "'");
-    var pTitle = (req.params.pTitle=='null' ? req.params.pTitle : "'" + req.params.pTitle + "'");
-    var pDescription = (req.params.pDescription=='null' ? req.params.pDescription : "'" + req.params.pDescription + "'");
-    var pImage =  (req.params.pImage=='null' ? req.params.pImage : "'" + req.params.pImage + "'");
-    var pWritten_by = (req.params.pWritten_by=='null' ? req.params.pWritten_by : "'" + req.params.pWritten_by + "'");
-    var pPublisher = (req.params.pPublisher=='null' ? req.params.pPublisher : "'" + req.params.pPublisher + "'");
-    lsql = "EXEC CreaNews " + pTime + ", " + pTitle + ", " + pDescription + ", "+  pImage + ", " + pWritten_by + ", " + pPublisher + "";
+    var pData = (req.params.pData=='null' ? req.params.pData : "'" + req.params.pData + "'");
+    lsql = "EXEC CargaData " + pData + "";
     console.log (lsql);
     executeQuery(res, lsql);
 });
 
-router.get('/News', function (req, res) {
+router.get('/Lista', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    lsql = 'EXEC ListNews';
-    executeQuery(res, lsql);
-});
-
-router.get('/News/:pidNoticia', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    lsql = 'EXEC ListNewsid '+ req.params.pidNoticia ;
+    lsql = 'EXEC ListaData';
     executeQuery(res, lsql);
 });
 
